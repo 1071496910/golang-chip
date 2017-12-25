@@ -7,4 +7,5 @@ import "fmt"
 func main() {
 	fmt.Println(tmpl.Parser("jetty", "hello"))
 	fmt.Println(tmpl.Parser("kiev", "world"))
+	fmt.Println(tmpl.Parser("task", "task"))
 }

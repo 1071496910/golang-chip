@@ -1,5 +1,7 @@
 package tmpl
 
+import "fmt"
+
 type Tmpl interface {
 	Parser(s string) string
 }
@@ -14,5 +16,5 @@ func Parser(tmplName string, content string) string {
 }
 
 func defaultParser(s string) string {
-	return fmt.Sprintf("defualt: %v", s)
+	return fmt.Sprintf("default: %v", s)
 }
