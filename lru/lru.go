@@ -109,11 +109,12 @@ func (l *lru) Add(key, value interface{}) bool {
 
 func (l *lru) commonGet(key interface{}, peek bool) (value interface{}, ok bool) {
 	l.mtx.Lock()
+	defer l.mtx.Unlock()
+
 	if l.l.Len() == 0 {
 		return nil, false
 	}
 
-	defer l.mtx.Unlock()
 	keyString := fmt.Sprint(key)
 	ok = true
 	value = nil
@@ -221,7 +222,7 @@ func (l *lru) Keys() []interface{} {
 	head := l.l.Front()
 	for i := 0; i < l.l.Len(); i++ {
 		if node, ok := head.Value.(*node); ok {
-			append(res, node.key)
+			res = append(res, node.key)
 		} else {
 			panic("pyte error")
 		}
